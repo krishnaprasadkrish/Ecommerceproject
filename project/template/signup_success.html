@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup Successful</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #a3a3a3;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color:rgb(92, 192, 192);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .login-link {
+            color: #414241;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .marquee {
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            color: rgb(255, 71, 95);
+            animation: marquee 15s linear infinite;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Signup Successful!</h1>
+        <div class="marquee">
+            <marquee>Thank you for signing up.</marquee>
+        </div>
+        <p><a href="/login" class="login-link">Back to Login</a></p>
+    </div>
+</body>
+</html>

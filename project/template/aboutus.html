@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Cricket Store</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body, ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        nav {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style-type: none;
+        }
+
+        nav ul li {
+            display: inline-block;
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        
+        .about-section {
+            background-color: #f8f8f8;
+            padding: 50px 0;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .container h1 {
+            margin-bottom: 20px;
+        }
+
+        .container p {
+            margin-bottom: 15px;
+        }
+
+        
+
+        .testimonials-section {
+            background-color: #fff;
+            padding: 50px 0;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .testimonial-container {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .testimonial {
+            flex: 0 0 100%;
+        }
+
+        .testimonial img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            object-fit: cover;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        footer p {
+            margin-bottom: 10px;
+        }
+
+        footer ul {
+            list-style-type: none;
+        }
+
+        footer ul li {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        footer ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        footer ul li a:hover {
+            text-decoration: underline;
+        }
+
+    
+        .accordion-item {
+            margin-bottom: 10px;
+            border: 1px solid #929292;
+            border-radius: 5px;
+            font-weight: bold;
+            color: #333;
+            background-color: #d2dd3a;
+        }
+
+        .accordion-header {
+            background-color: #dfe6e5;
+            border-bottom: 1px solid #ccc;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .accordion-header:hover {
+            background-color: #edfcc4;
+        }
+
+        .accordion-body {
+            padding: 10px;
+            background-color: #fff;
+        }
+
+        .item-img {
+            max-width: 100%;
+            border-radius: 5px;
+        }
+    </style>
+
+</head>
+<body>
+
+<nav>
+    <ul>
+        <li><a href="{{ url_for('home') }}">Home</a></li>
+        <li><a href="https://www.google.com/maps/dir//No.+2-29%2F1%2FA+Old+Mumbai+Highway+Indira+Nagar,+Gachibowli+Next+to+RedMi+Showroom,+near+SBI,+Hyderabad,+Telangana+500032/@17.4414839,78.2775463,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x3bcb954d9466ebdd:0xe104b34e2e12341a!2m2!1d78.3599481!2d17.4415008?entry=ttu">Google Maps</a></li>
+        <li><a href="{{ url_for('gallery') }}">Gallery</a></li>
+        <li><a href="{{ url_for('contactus') }}">Contact Us</a></li>
+    </ul>
+</nav>
+
+<main>
+    <section class="about-section">
+        <div class="container">
+            <h1>About Us</h1>
+            <p>Welcome to our Cricket Store!</p>
+            <p>We are dedicated to providing high-quality cricket equipment to cricket enthusiasts of all ages and skill levels.</p>
+            <p>Our mission is to make your cricket experience enjoyable by offering a wide range of products including bats, balls, protective gear, apparel, and accessories.</p>
+            <p>At our store, you'll find top brands and the latest innovations in cricket technology. Whether you're a beginner or a seasoned player, we have the right equipment to suit your needs.</p>
+            <p>Our knowledgeable staff is here to assist you in finding the perfect gear and providing expert advice on product selection and maintenance.</p>
+            <p>Thank you for choosing our Cricket Store for all your cricketing needs. We look forward to serving you!</p>
+        </div>
+    </section>
+
+
+    <section class="about-section">
+        <div class="container">
+            <h1>Cricket Store Categories</h1>
+            <div id="accordion">
+                <div class="accordion-item">
+                    <h3 class="accordion-header" id="headingOne">
+                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Bats
+                        </button>
+                    </h3>
+                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div class="accordion-body">
+                            <img src="static/dscbat.jpg" alt="Cricket Bat" class="item-img">
+                            <p>Explore our wide range of cricket bats including Kashmir Willow, English Willow, and more!</p>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="accordion-item">
+                    <h3 class="accordion-header" id="headingTwo">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Balls
+                        </button>
+                    </h3>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                        <div class="accordion-body">
+                            <img src="static/balls.jpg" alt="Cricket Ball" class="item-img">
+                            <p>Find high-quality cricket balls suitable for matches and practice sessions.</p>
+                        </div>
+                    </div>
+                </div>
+
+        
+                <div class="accordion-item">
+                    <h3 class="accordion-header" id="headingThree">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            Helmets
+                        </button>
+                    </h3>
+                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                        <div class="accordion-body">
+                            <img src="static/helmet.jpg" alt="Cricket Helmet" class="item-img">
+                            <p>Stay protected with our range of cricket helmets.</p>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="accordion-item">
+                    <h3 class="accordion-header" id="headingFour">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            Pads
+                        </button>
+                    </h3>
+                    <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+                        <div class="accordion-body">
+                            <img src="static/pads.jpeg" alt="Cricket Pads" class="item-img">
+                            <p>Protect your legs with our range of cricket pads.</p>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="accordion-item">
+                    <h3 class="accordion-header" id="headingFive">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                            Gloves
+                        </button>
+                    </h3>
+                    <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
+                        <div class="accordion-body">
+                            <img src="static/gloves.jpeg" alt="Cricket Gloves" class="item-img">
+                            <p>Get a grip with our range of cricket gloves.</p>
+                        </div>
+                    </div>
+                </div>
+
+               
+                <div class="accordion-item">
+                    <h3 class="accordion-header" id="headingSix">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                            Wickets
+                        </button>
+                    </h3>
+                    <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordion">
+                        <div class="accordion-body">
+                            <img src="static/wickets.jpeg" alt="Cricket Wickets" class="item-img">
+                            <p>Essential for any cricket match, explore our range of cricket wickets.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials-section">
+        <div class="container">
+            <h2>Legends Of Cricket</h2>
+            <div id="testimonialCarousel" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="row">
+                            <div class="col-md-6 mx-auto">
+                                <div class="testimonial-slide">
+                                    <img src="static/sachin.jpg" alt="Rohit Sharma" class="rounded-circle img-fluid">
+                                    <p class="testimonial">"Great store with excellent customer service. Bought my cricket bat here and it's been performing exceptionally well!"</p>
+                                    <p class="author">- Sachin Tendulkar</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="row">
+                            <div class="col-md-6 mx-auto">
+                                <div class="testimonial-slide">
+                                    <img src="static/kohli.jpg" alt="Rohit Sharma" class="rounded-circle img-fluid">
+                                    <p class="testimonial">"Highly recommended! Got all my cricket gear from here and couldn't be happier with the quality."</p>
+                                    <p class="author">- Virat Kohli</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="row">
+                            <div class="col-md-6 mx-auto">
+                                <div class="testimonial-slide">
+                                    <img src="static/rohit.jpg" alt="Rohit Sharma" class="rounded-circle img-fluid">
+                                    <p class="testimonial">"The staff is very knowledgeable and helped me pick the perfect cricket shoes. Thanks, Cricket Store!"</p>
+                                    <p class="author">- Rohit Sharma</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#testimonialCarousel" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#testimonialCarousel" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="container">
+        <p>&copy; 2024 Cricket Store. All rights reserved.</p>
+        <ul>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+        </ul>
+    </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

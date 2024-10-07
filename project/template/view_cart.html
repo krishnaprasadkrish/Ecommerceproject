@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Cart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #8a989e;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #e6e6e6; 
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #1a1aff; 
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #c0d15f; 
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .product-info {
+            margin-bottom: 10px;
+        }
+
+        .product-info h3 {
+            color: #008000; 
+            margin: 0;
+        }
+
+        .product-info p {
+            color: #333;
+            margin: 0;
+        }
+
+        .quantity-control {
+            display: flex;
+            align-items: center;
+        }
+
+        .quantity-control button {
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            margin-right: 5px;
+        }
+
+        .quantity-control button.increase {
+            background-color: #06eb52; 
+            color: #fff;
+            border: none;
+        }
+
+        .quantity-control button.decrease {
+            background-color: #fc0707;
+            color: #fff;
+            border: none;
+        }
+
+        .quantity-control button.remove {
+            background-color: #7e797c; 
+            color: #fff;
+            border: none;
+        }
+
+        .quantity-control input {
+            width: 50px;
+            text-align: center;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            padding: 5px;
+        }
+
+        .empty-cart-message {
+            text-align: center;
+            color: #184404; 
+        }
+
+        .back-to-dashboard {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #1a1aff; 
+            transition: color 0.3s;
+        }
+
+        .back-to-dashboard:hover {
+            color: #000080; 
+        }
+
+        .order-section {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .order-button {
+            padding: 10px 20px;
+            background-color: #1a1aff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .order-button:hover {
+            background-color: #0000e6;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        <h1>Cart</h1>
+       
+        <ul id="cart-items">
+            
+        </ul>
+        <p class="empty-cart-message">Your cart is empty.</p>
+      
+        <div class="order-section">
+            <a href="/order" class="order-button">Order</a>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            var cart = JSON.parse(localStorage.getItem('cart')) || [];
+            var $cartItems = $('#cart-items');
+
+            if (cart.length === 0) {
+                $('.empty-cart-message').show();
+            } else {
+                $('.empty-cart-message').hide();
+                cart.forEach(function(item) {
+                    var li = $('<li>').appendTo($cartItems);
+                    $('<div class="product-info">').html(`<h3>${item.name}</h3><p>Price: ₹${item.price}</p>`).appendTo(li);
+                    var quantityControl = $('<div class="quantity-control">').appendTo(li);
+                    $('<button class="decrease">-</button>').on('click', function() { updateQuantity(item.id, -1); }).appendTo(quantityControl);
+                    $('<input type="number" value="' + item.quantity + '" readonly>').appendTo(quantityControl);
+                    $('<button class="increase">+</button>').on('click', function() { updateQuantity(item.id, 1); }).appendTo(quantityControl);
+                    $('<button class="remove">Remove</button>').on('click', function() { removeFromCart(item.id); }).appendTo(quantityControl);
+                    $('<span class="total-price">').text('Total: ₹' + (item.price * item.quantity).toFixed(2)).appendTo(quantityControl);
+                });
+            }
+
+            $('#order-button').on('click', function() {
+                window.location.href = 'order.html'; 
+            });
+
+            function updateQuantity(productId, change) {
+                var item = cart.find(function(item) {
+                    return item.id === productId;
+                });
+
+                if (item) {
+                    item.quantity += change;
+                    if (item.quantity <= 0) {
+                        cart = cart.filter(function(item) {
+                            return item.id !== productId;
+                        });
+                    }
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    location.reload(); 
+                }
+            }
+
+            function removeFromCart(productId) {
+                cart = cart.filter(function(item) {
+                    return item.id !== productId;
+                });
+                localStorage.setItem('cart', JSON.stringify(cart));
+                location.reload(); 
+            }
+        });
+      
+    
+
+
+
+
+    </script>
+</body>
+</html>

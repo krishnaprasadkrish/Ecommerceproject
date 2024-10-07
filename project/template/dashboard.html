@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cricket Store</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        
+        .navbar {
+            background-color: #41ac33;
+            color: black;
+        }
+
+        .navbar-brand,
+        .navbar-nav .nav-link {
+            color: white;
+        }
+
+        .navbar-brand:hover,
+        .navbar-nav .nav-link:hover {
+            color: lightgray;
+        }
+
+        
+        .profile-image {
+            width: 80px; 
+            height: 80px; 
+            border-radius: 50%;
+            border: 2px solid #ccc;
+            object-fit: cover;
+            position: relative;
+            top: 0px; 
+            right: 100px;
+            left: 100px;
+        }
+
+        
+        body.dark-mode {
+            background-color: #333;
+            color: #fff;
+        }
+
+        .navbar.dark-mode {
+            background-color: #222;
+            color: #fff;
+        }
+
+        .navbar.dark-mode .navbar-brand,
+        .navbar.dark-mode .navbar-nav .nav-link {
+            color: #fff;
+        }
+
+        .navbar.dark-mode .navbar-brand:hover,
+        .navbar.dark-mode .navbar-nav .nav-link:hover {
+            color: lightgray;
+        }
+
+        
+        #darkModeToggleContainer {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        p{
+            justify-content: center;
+            color: dimgrey;
+            font-family: 'Times New Roman', Times, serif;
+        }
+    </style>
+</head>
+<body>
+
+
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+        <a class="navbar-brand">Cricket Store</a>
+       
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ url_for('home') }}">Home</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{url_for('aboutus')}}">About</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/product">Add Product</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/product_list">Product List</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/visitors">Visitors List</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/logout">Logout</a>
+                </li>
+            </ul>
+        </div>
+
+       
+        <div id="darkModeToggleContainer" class="form-check form-switch">
+            <input type="checkbox" class="form-check-input" id="darkModeToggle">
+            <label class="form-check-label" for="darkModeToggle">Dark Mode</label>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-8">
+            <h2>Welcome, {{ firstname }} {{ lastname }}</h2>
+            <p> We offer a wide range of cricket equipment and accessories to meet all your cricketing needs. Whether you're a professional cricketer or just starting out, we have everything you need to excel on the field.</p>
+            <p>From cricket bats and balls to protective gear and clothing, we have it all. Our products are sourced from top brands known for their quality and performance, ensuring that you get the best value for your money.</p>
+            <p>Explore our store today and take your game to the next level!</p>
+        </div>
+        <div class="col-4 text-right">
+            {% if photo_data %}
+                <img src="data:image/{{ photo_format }};base64,{{ photo_data }}" alt="Profile Photo"
+                     class="profile-image">
+            {% else %}
+                <img src="{{ url_for('static', filename='default_profile.jpeg') }}" alt="Default Profile Photo"
+                     class="profile-image">
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<script>
+   
+    const darkModeToggle = document.getElementById('darkModeToggle');
+
+    darkModeToggle.addEventListener('change', function() {
+        document.body.classList.toggle('dark-mode', darkModeToggle.checked);
+    });
+    
+    document.getElementById('logout-button').addEventListener('click', function() {
+        fetch('/logout', { method: 'GET' })
+        .then(response => {
+            window.location.href = "{{ url_for('login') }}";
+        })
+        .catch(error => console.error('Error logging out:', error));
+    });
+
+    window.onload = function() {
+        
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
+        }
+    }
+    </script>
+ 
+</body>
+</html>

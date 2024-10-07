@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Visitors List</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<style>
+    body {
+    background-color: #a3a3a3;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h2 {
+    color: #52779e;
+    margin-bottom: 20px;
+}
+
+.table th {
+    background-color: #8da508;
+    color: #babbb7;
+}
+
+.table td {
+    padding: 8px;
+}
+
+
+
+</style>
+<body>
+
+<div >
+    <h2>Visitors List</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            {% for visitor in visitors %}
+            <tr>
+                <td>{{ visitor.firstname }} {{ visitor.lastname }}</td>
+                
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login Page</title>
+<style>
+    body{
+        background-image: url('static/kit1.jpg');
+        background-size: cover;
+    }
+    label{
+        color:black;
+        font-weight: bold;
+        background-color: whitesmoke;
+    }
+    .container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        background-color: whitesmoke;
+        transform: translate(-50%, -50%);
+        text-align: justify;
+        
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(76, 3, 99, 0.1);
+    }
+
+   
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    input[type="email"],
+    input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+        font-size: 16px;
+    }
+
+    input[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #19df8c;
+    }
+
+    .error-message {
+        color: red;
+    }
+    a{
+        color: rgb(231, 10, 10);
+        background-color: whitesmoke;
+        font-weight: bold;
+    }
+</style>
+</head>
+<body>
+    <div class="container">
+        <h2>Login</h2>
+        {% if error %}
+        <p class="error-message">{{ error }}</p>
+        {% endif %}
+        <form action="/login" method="POST">
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" placeholder="Password" required>
+            </div>
+            <input type="submit" value="Login">
+        </form>
+        <p><a href="/forgot_password">Forgot Password?</a></p>
+    </div>
+</body>
+</html>

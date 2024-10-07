@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-kSxcF38aUmO+H7jKHfKbyKs5kb6csxEeXwPzvsVnD6DvK13h9JFwl7PknYoR/qQl2rszzx2WVw+Rwoxtj4eS+A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #7ebe78;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #7d919e;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fff;
+            overflow: hidden;
+        }
+
+        .product-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .product-image {
+            width: 100px;
+            height: 100px;
+            margin-right: 20px;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-details h3 {
+            margin-top: 0;
+        }
+
+        .add-to-cart-form button {
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .add-to-cart-form button:hover {
+            background-color: #45a049;
+        }
+
+        .cart-button {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .cart-button a {
+            display: inline-block;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .cart-button a:hover {
+            background-color: #0056b3;
+        }
+
+        .logout-icon {
+            color: white;
+            position: absolute;
+            top: 20px; 
+            right: 20px;
+            font-size: 24px;
+            text-decoration: none; 
+        }
+        
+        .logout-icon:hover {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <a href="/logout" class="logout-icon">
+        <i class="fas fa-sign-out-alt"></i> Logout
+    </a>
+    <div class="container">
+        
+        <h1>Welcome, {{ firstname }} {{ lastname }}</h1>
+        <h2>Products</h2>
+        <ul>
+        {% for product in products %}
+            <li>
+                <div class="product-info">
+                    <div class="product-image">
+                        {% if product.image %}
+                        <img src="data:image/jpeg;base64,{{ product.image }}" alt="{{ product.product_name }}">
+                        {% else %}
+                        No Image
+                        {% endif %}
+                    </div>
+                    <div class="product-details">
+                        <h3>{{ product.product_name }}</h3>
+                        <p>Price: {{ product.price }}</p>
+                    </div>
+                </div>
+                <div class="add-to-cart-form">
+                    <form id="add-to-cart-form-{{ product.id }}" onsubmit="addToCart('{{ product.id }}', '{{ product.product_name }}', '{{ product.price }}'); return false;">
+                        <button type="submit" onclick="myFunction()">Add to Cart</button>
+                        <script>
+                            function myFunction() {
+                              alert("Item added to cart!");
+                            }
+                            </script>
+                    </form>
+                </div>
+            </li>
+        {% endfor %}
+        </ul>
+
+        <div class="cart-button">
+            <a href="/view_cart">View Cart</a>
+        </div>
+
+        <div id="cart-message" class="cart-message"></div>
+    </div>
+
+    <script>
+        document.getElementById('logout-button').addEventListener('click', function() {
+            fetch('/logout', { method: 'GET' })
+            .then(response => {
+                window.location.href = "{{ url_for('login') }}";
+            })
+            .catch(error => console.error('Error logging out:', error));
+        });
+
+        window.onload = function() {
+          
+            if (window.history.replaceState) {
+                window.history.replaceState(null, null, window.location.href);
+            }
+        }
+    </script>
+</body>
+</html>
